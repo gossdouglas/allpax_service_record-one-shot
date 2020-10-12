@@ -69,6 +69,8 @@
             var dailyRptTeamArr = [];
             var dailyRptTeamUserIDArr = [];
 
+            var indexWorkDescEntries = 0;
+
             var jobs_dpdown = $('#jobs_dpdown');
             var subJobTypes_dpdwn = $('#subJobTypes_dpdwn');
             var team_dpdwn = $('#team_dpdwn');
@@ -327,16 +329,28 @@
                 //$(".workDescTeam_dpdwn_div").hide();
                 //$("#newWorkDescBtn_edit").show();//DOESN'T EXIST               
 
+                indexWorkDescEntries = indexWorkDescEntries + 1;
                 //append a new row
-                $("#workDescriptionLine_template_row").clone(true).prop("id", "").appendTo("#workDescriptionLine_entries");
+                $("#workDescriptionLine_template_row").clone(true).prop("id", "workDescriptionLine_"+indexWorkDescEntries+"_row").appendTo("#workDescriptionLine_entries");
 
-                $("#workDescriptionLine_entries").last().find(".workDescTeam_dpdwn").prop("class", "workDescTeam_dpdwnLine");
+                //$("#workDescriptionLine_entries").last().find(".workDescTeam_dpdwn").prop("class", "workDescTeam_dpdwnLine");
+
+                //give the cloned row a unique ID.  this is necessary for automatic follow-on steps to carry out properly
+                $("#workDescriptionLine_entries").last().find(".workDescTeam_dpdwn").prop("id", "workDescTeam_dpdwnLine_" + indexWorkDescEntries);
+                //set the class type to a select2 type
+                $("#workDescriptionLine_entries").last().find(".workDescTeam_dpdwn").prop("class", "workDescTeam_dpdwnLine select2-hidden-accessible");
+
                 //$("#workDescriptionLine_entries").last().find(".workDescTeam_dpdwnLine").html
-                //    ("<option value='volvo'>Volvo</option>< option value = 'saab'> Saab</option><option value='mercedes'>Mercedes</option><option value='audi'>Audi</option>");
+                //    ("<option value='volvo'>Volvo</option>< option value = 'saab'> "+
+                //        "Saab</option > <option value='mercedes'>Mercedes</option><option value='audi'>Audi</option>");
                 $(".workDescTeam_dpdwnLine").select2();
                 $(".workDescTeam_dpdwn").select2();
 
-                //$("#workDescriptionLine_entries").last().find(".workDescTeam_dpdwn_div").html("<select class='workDescTeam_dpdwnLine' id='' multiple='multiple'>< option value = 'volvo' > Volvo</option ><option value='saab'>Saab</option><option value='mercedes'>Mercedes</option><option value='audi'>Audi</option></select >");
+                //$("#workDescriptionLine_entries").last().find(".workDescTeam_dpdwn_div").html("<select class='workDescTeam_dpdwnLine' id='' multiple='multiple'>"+
+                //    "<option value='volvo' >Volvo</option >"+
+                //    "<option value='saab'>Saab</option>"+
+                //    "<option value='mercedes'>Mercedes</option>" +
+                //    "<option value='audi'>Audi</option></select >");
 
                 select2_reinitialize("workDescTeam_dpdwnLine");
                 select2_reinitialize("workDescTeam_dpdwn");
