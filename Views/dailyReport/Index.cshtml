@@ -321,18 +321,11 @@
                 $(currentTeamDpdwn).each(function (index) {
                     currentWorkDescNarr = currentWorkDescNarr.concat($(this).attr("title") + "|");
                 });
-                currentTeamDpdwnParsed.html(currentWorkDescNarr);
-               
-                //$(".workDescTeam_dpdwn_parsed_div").removeAttr("hidden");
-                //$(".workDescTeam_dpdwn_parsed_div").show();
-
-                //$(".workDescTeam_dpdwn_div").hide();            
+                currentTeamDpdwnParsed.html(currentWorkDescNarr);       
 
                 indexWorkDescEntries = indexWorkDescEntries + 1;
                 //append a new row
                 $("#workDescriptionLine_template_row").clone(true).prop("id", "workDescriptionLine_"+indexWorkDescEntries+"_row").appendTo("#workDescriptionLine_entries");
-
-                //$("#workDescriptionLine_entries").last().find(".workDescTeam_dpdwn").prop("class", "workDescTeam_dpdwnLine");
 
                 //give the cloned row a unique ID.  this is necessary for automatic follow-on steps to carry out properly
                 $("#workDescriptionLine_entries").last().find(".workDescTeam_dpdwn").prop("id", "workDescTeam_dpdwnLine_" + indexWorkDescEntries);
