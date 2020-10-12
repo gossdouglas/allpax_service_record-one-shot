@@ -1,0 +1,118 @@
+﻿@model List<allpax_service_record.Models.View_Models.vm_dailyReportByReportID>
+@*@model IEnumerable<allpax_service_record.Models.View_Models.vm_dailyReportByReportID>*@
+
+@{
+    ViewBag.Title = "Index";
+    //Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = null;
+}
+
+    <head>       
+    </head>
+@*PRINT DAILY REPORT BY REPORT ID PAGE*@
+    <script>
+        $(document).ready(function () {//begin document read jquery statements
+            
+        });//end document read jquery statements
+    </script>
+
+    <div class="container printable" id="contnr_team">
+        <div class="row">
+            <div class="col-3" style="padding:5px">
+                <span><strong>Daily Log</strong></span>
+                <span><strong>Record No</strong></span>
+                <span id="txt_dailyReportID" value="@Model.First().dailyReportID">@Model.First().dailyReportID</span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-3" style="padding:5px">
+                <span><strong>Date: </strong></span> <span>@Model.First().date</span>
+                <span><strong>Customer: </strong></span>  <span>@Model.First().customerName</span>
+                <span><strong>Customer Code: </strong></span>  <span>@Model.First().customerCode</span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-3" style="padding:5px">
+                <span><strong>Customer Contact: </strong></span>  <span>@Model.First().customerContact</span>
+                <span><strong>Location: </strong></span>  <span>@Model.First().address</span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-3" style="padding:5px">
+                <span><strong>Correspondents: </strong></span>
+                @foreach (var item in Model)
+                {
+
+                    //BEGIN TEMPORARY LOOP VARIABLES
+                    List<string> temp_jobCorrespondentName = item.jobCorrespondentName;
+                    //END TEMPORARY LOOP VARIABLES
+
+                    for (var i = 0; i < (temp_jobCorrespondentName.Count); i++)
+                    {
+                        <span>@temp_jobCorrespondentName[@i]</span>
+                    }
+                }
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-3" style="padding:5px">
+                <span><strong>Equipment: </strong></span>  <span>@Model.First().equipment</span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-3" style="padding:5px">
+                <span><strong>Start Time: </strong></span>  <span>@Model.First().startTime</span>
+                <span><strong>End Time: </strong></span>  <span>@Model.First().endTime</span>
+                <span><strong>Lunch (hr): </strong></span>  <span>@Model.First().lunchHours</span>
+            </div>
+        </div>
+    </div>
+<hr style="margin:1px; opacity:0" />
+@*BEGIN ALLPAX TEAM*@
+<div class="container printable" id="contnr_team">
+    <div class="row">
+        <div class="col-2" style="padding:5px">
+            <span><strong>Allpax Team:</strong></span>
+            @foreach (var item in Model)
+            {
+
+                //BEGIN TEMPORARY LOOP VARIABLES
+                List<string> temp_Names = item.names;
+                List<string> temp_shortNames = item.shortNames;
+                //END TEMPORARY LOOP VARIABLES
+
+                for (var i = 0; i < (temp_Names.Count); i++)
+                {
+                <span>@temp_Names[@i]|@temp_shortNames[@i]</span>
+                }
+            }
+        </div>
+    </div>
+</div>
+@*END ALLPAX TEAM*@
+<hr style="margin:1px; opacity:1" />
+<div class="container" id="">
+    @*@{Html.RenderAction("Index", "workDescPrint", new { dailyReportID = ViewBag.reportID });*@
+    @{Html.RenderAction("Index", "workDescPrint", new { dailyReportID = Model.First().dailyReportID });
+     }
+    </div>
+<hr style="margin:1px; opacity:1" />
+<div class="container" id="">
+    @{Html.RenderAction("Index", "workDescDelaysPrint", new { dailyReportID = Model.First().dailyReportID });
+    }
+</div>
+<hr style="margin:1px; opacity:1" />
+<div class="container" id="">
+    @{Html.RenderAction("Index", "workDescWntyDelaysPrint", new { dailyReportID = Model.First().dailyReportID });
+    }
+</div>
+
+
+
+
+
+
+
+
+
+
