@@ -41,6 +41,8 @@
             var standardElementHeight = $("#newWorkDescBtn_save").height();
             $(".standardInput").height(standardElementHeight);
 
+            //select2_reinitialize();
+
             $('.workDescTeam_dpdwn').select2({
                 width: "100%",
                 placeholder: "Select Team",
@@ -48,6 +50,17 @@
             });
 
             $('.workDescTeam_dpdwn').on('select2:opening select2:closing', function (event) {
+                var $searchfield = $(this).parent().find('.select2-search__field');
+                $searchfield.prop('disabled', true);
+            });
+
+            $('.workDescTeam_dpdwnLine').select2({
+                width: "100%",
+                placeholder: "Select Team",
+                closeOnSelect: "false"
+            });
+
+            $('.workDescTeam_dpdwnLine').on('select2:opening select2:closing', function (event) {
                 var $searchfield = $(this).parent().find('.select2-search__field');
                 $searchfield.prop('disabled', true);
             });
@@ -301,46 +314,64 @@
             //begin #addButton
             $("#newWorkDescBtn_add").click(function () {//when the add button is clicked...
                 var currentWorkDescNarr = "";
-                var currentTeamDpdwn = $(this).parents(":eq(2)").find(".workDescTeam_dpdwn_div").find("#select2-workDescTeam_dpdwn-container li");
-                var currentTeamDpdwnParsed = $(this).parents(":eq(2)").find(".workDescTeam_dpdwn_parsed_div");
-
+                var currentTeamDpdwn = $(this).parent().parent().find(".workDescTeam_dpdwn_div").find("#select2-workDescTeam_dpdwn-container li");
+                var currentTeamDpdwnParsed = $(this).parent().parent().find(".workDescTeam_dpdwn_parsed_div");
                 $(currentTeamDpdwn).each(function (index) {
                     currentWorkDescNarr = currentWorkDescNarr.concat($(this).attr("title") + "|");
                 });
                 currentTeamDpdwnParsed.html(currentWorkDescNarr);
+               
+                //$(".workDescTeam_dpdwn_parsed_div").removeAttr("hidden");
+                //$(".workDescTeam_dpdwn_parsed_div").show();
 
-                $(".workDescTeam_dpdwn_parsed_div").removeAttr("hidden");
-                $(".workDescTeam_dpdwn_parsed_div").show();
+                //$(".workDescTeam_dpdwn_div").hide();
+                //$("#newWorkDescBtn_edit").show();//DOESN'T EXIST               
 
-                $(".workDescTeam_dpdwn_div").hide();
-                $("#newWorkDescBtn_edit").show();
-
+                //append a new row
                 $("#workDescriptionLine_template_row").clone(true).prop("id", "").appendTo("#workDescriptionLine_entries");
 
-                // $("#workDescTeam_dpdwn").val(null).trigger('change');
+                $("#workDescriptionLine_entries").last().find(".workDescTeam_dpdwn").prop("class", "workDescTeam_dpdwnLine");
+                //$("#workDescriptionLine_entries").last().find(".workDescTeam_dpdwnLine").html
+                //    ("<option value='volvo'>Volvo</option>< option value = 'saab'> Saab</option><option value='mercedes'>Mercedes</option><option value='audi'>Audi</option>");
+                $(".workDescTeam_dpdwnLine").select2();
+                $(".workDescTeam_dpdwn").select2();
+
+                //$("#workDescriptionLine_entries").last().find(".workDescTeam_dpdwn_div").html("<select class='workDescTeam_dpdwnLine' id='' multiple='multiple'>< option value = 'volvo' > Volvo</option ><option value='saab'>Saab</option><option value='mercedes'>Mercedes</option><option value='audi'>Audi</option></select >");
+
+                select2_reinitialize("workDescTeam_dpdwnLine");
+                select2_reinitialize("workDescTeam_dpdwn");
 
                 $("#workDescriptionLine_entries").last().find(".workDescTeam_dpdwn").prop("id", "");
-                $("#workDescriptionLine_entries").last().find(".workDescTeam_narr_div").attr("contenteditable", "false");
-                $("#workDescriptionLine_entries").last().find("#newWorkDescBtn_add").remove();
-                $("#workDescriptionLine_entries").last().find("#newWorkDescBtn_clear").remove();
-                $("#workDescriptionLine_entries").last().find(".lineWorkDescBtn_edit").removeAttr("hidden");
-                $("#workDescriptionLine_entries").last().find(".lineWorkDescBtn_delete").removeAttr("hidden");
+                
+                $("#workDescriptionLine_entries").last().find(".workDescTeam_narr_div").attr("contenteditable", "false");//lock the narrative for edits
+
+                $("#workDescriptionLine_entries").last().find(".workDescTeam_dpdwn_div").hide();//hide the team dropdown
+                $("#workDescriptionLine_entries").last().find(".workDescTeam_dpdwn_parsed_div").removeAttr("hidden");//show the parsed version of the team dropdown
+                $("#workDescriptionLine_entries").last().find(".workDescTeam_dpdwn_parsed_div").show();//show the parsed version of the team dropdown
+
+                $("#workDescriptionLine_entries").last().find("#newWorkDescBtn_add").remove();//remove the add button, only needed for new work descriptions
+                $("#workDescriptionLine_entries").last().find("#newWorkDescBtn_clear").remove();//remove the clear button, only needed for new work descriptions
+                $("#workDescriptionLine_entries").last().find(".lineWorkDescBtn_edit").removeAttr("hidden");//show the edit button, only needed for work description line entries
+                $("#workDescriptionLine_entries").last().find(".lineWorkDescBtn_delete").removeAttr("hidden");//show the delete button, only needed for work description line entries
 
                 $("#workDescriptionLine_entries").last().find(".workDescTeam_narr_div").css('border-bottom-style', 'none');
                 $("#workDescriptionLine_entries").last().find(".workDescTeam_dpdwn_parsed_div").css('border-bottom-style', 'none');
                 $("#workDescriptionLine_entries").last().find(".workDescTeam_button_div").css('border-bottom-style', 'none');
 
+                //BEGIN RESET THE NEW WORK DESCRIPTION ENTRY ROW AFTER CLONING
                 $("#workDescriptionLine_template_row").find(".workDescTeam_narr_div").html("");//clear the new work description narrative text
                 $("#workDescriptionLine_template_row").find(".workDescTeam_narr_div").attr("contenteditable", "true");//set the work description input to editable
                 $("#workDescriptionLine_template_row").find(".workDescTeam_dpdwn_parsed_div").hide();
                 $("#workDescriptionLine_template_row").find(".workDescTeam_dpdwn_div").show();
                 $("#workDescriptionLine_template_row").find(".select2-selection__rendered li").remove();
-
+                $(".workDescTeam_dpdwn").val(null).trigger("change");//reset the new work description team dropdown
+                //END RESET THE NEW WORK DESCRIPTION ENTRY ROW AFTER CLONING
             });
 
             //$(".workDescTeam_button_div").click(function () {
             $(".lineWorkDescBtn_edit").click(function () {
-                var currentRow = $(this).parents(":eq(2)");
+                //var currentRow = $(this).parents(":eq(2)");
+                var currentRow = $(this).parent().parent();
 
                 $(this).hide();
                 $(currentRow).find(".lineWorkDescBtn_save").removeAttr("hidden");
@@ -378,7 +409,8 @@
             });
 
             $(".lineWorkDescBtn_delete").click(function () {
-                var currentRow = $(this).parents(":eq(2)");
+                //var currentRow = $(this).parents(":eq(2)");
+                var currentRow = $(this).parent().parent();
 
                 $.confirm({
                     title: 'Delete Entry?',
@@ -456,6 +488,36 @@
                 //    }
                 //});
                 //end load work description dropdown with possible team members
+            }
+
+            function select2_reinitialize(select2Class) {
+                //$('.workDescTeam_dpdwn').select2({
+                //    width: "100%",
+                //    placeholder: "Select Team",
+                //    closeOnSelect: "false"
+                //});
+
+                //$('.workDescTeam_dpdwn').on('select2:opening select2:closing', function (event) {
+                //    var $searchfield = $(this).parent().find('.select2-search__field');
+                //    $searchfield.prop('disabled', true);
+                //});
+
+                //$('.workDescTeam_dpdwnLine').select2({
+                //    width: "100%",
+                //    placeholder: "Select Team",
+                //    closeOnSelect: "false"
+                //});
+
+                //$('.workDescTeam_dpdwnLine').on('select2:opening select2:closing', function (event) {
+                //    var $searchfield = $(this).parent().find('.select2-search__field');
+                //    $searchfield.prop('disabled', true);
+                //});
+
+                $('.'+select2Class).select2({
+                    width: "100%",
+                    placeholder: "Select Team",
+                    closeOnSelect: "false"
+                });
             }
 
         });//end document read jquery statements
@@ -655,6 +717,14 @@
                 <select class="workDescTeam_dpdwn" id="workDescTeam_dpdwn" multiple="multiple">
                 </select>
             </div>
+            @*<div class="col-4 workDescTeam_dpdwn_divLine" style="padding:0px;">
+                <select class="workDescTeam_dpdwnLine" id="" multiple="multiple">
+                    <option value="volvo">Volvo</option>
+                    <option value="saab">Saab</option>
+                    <option value="mercedes">Mercedes</option>
+                    <option value="audi">Audi</option>
+                </select>
+            </div>*@
             <div class="col-4 workDescTeam_dpdwn_parsed_div" id="workDescTeam_dpdwn_parsed_div" hidden contenteditable="false" style="padding:5px; border:1px solid black;">
                 fdkjfjdklfjdfdjfl
             </div>
