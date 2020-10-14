@@ -323,7 +323,7 @@
 
                 var selectedTeamListHtml = $("#workDescriptionLine_template_row").find(".select2-selection__rendered").html();
                 var selectedTeamListHtml2 = $("#workDescriptionLine_template_row").find(".select2").html();
-                var selectedTeamListHtml3 = $("#workDescriptionLine_template_row").find(".workDescTeam_dpdwn_div").html();
+                
                 //console.log(selectedTeamListHtml2);
                 //var currentworkDescriptionLine_entries_row = $("#workDescriptionLine_" + indexWorkDescEntries + "_row"); 
 
@@ -338,17 +338,24 @@
                 });
                 currentTeamDpdwnParsed.html(currentWorkDescTeamShortNamesParsed); 
 
-                //console.log($("#workDescriptionLine_template_row").find(".select2-selection__rendered").html());
-                //$('.workDescTeam_dpdwn').select2("destroy");
-                $('#workDescTeam_dpdwn').select2("destroy");
+                //$('#workDescTeam_dpdwn').select2("destroy");
 
                 //append a new row
                 $("#workDescriptionLine_template_row").clone(true).prop("id", "workDescriptionLine_" + indexWorkDescEntries + "_row").appendTo("#workDescriptionLine_entries");
+
                 //$(currentWorkDescTeamRendered).clone(true).prop("id", "select2-workDescTeam_dpdwn_" + indexWorkDescEntries+ "-container").appendTo("#workDescriptionLine_entries");
                 
                 //give the cloned row a unique ID.  this is necessary for automatic follow-on steps to carry out properly
                 //$("#workDescriptionLine_entries").last().find(".workDescTeam_dpdwn").prop("id", "workDescTeam_dpdwnLine_" + indexWorkDescEntries);
                 $("#workDescriptionLine_" + indexWorkDescEntries + "_row").find(".workDescTeam_dpdwn").prop("id", "workDescTeam_dpdwnLine_" + indexWorkDescEntries);
+
+                var editedworkDescTeam_dpdwn_div = $("#workDescriptionLine_" + indexWorkDescEntries + "_row").find(".workDescTeam_dpdwn_div").html();
+                //console.log(editedworkDescTeam_dpdwn_div);
+                editedworkDescTeam_dpdwn_div = editedworkDescTeam_dpdwn_div.replace(/-workDescTeam_dpdwn-/gi, "-workDescTeam_dpdwnLine_" + indexWorkDescEntries + "-");
+                //console.log(editedworkDescTeam_dpdwn_div);
+
+                $("#workDescriptionLine_" + indexWorkDescEntries + "_row").find(".workDescTeam_dpdwn_div").html(editedworkDescTeam_dpdwn_div);
+
                 //set the class type to a select2 type
                 //$("#workDescriptionLine_entries").last().find(".workDescTeam_dpdwn").prop("class", "workDescTeam_dpdwnLine select2-hidden-accessible");
                 //set the id of the newly created line to null
@@ -356,18 +363,7 @@
 
                 //$('.workDescTeam_dpdwn').select2();//re-initalize after clone
                 //$('.workDescTeam_dpdwnLine').select2();//re-initalize after clone
-                
-                //$("#workDescriptionLine_entries").last().find(".workDescTeam_narr_div").attr("contenteditable", "false");//lock the narrative for edits
-                //$("#workDescriptionLine_entries").last().find(".workDescTeam_dpdwn_div").hide();//hide the team dropdown
-                //$("#workDescriptionLine_entries").last().find(".workDescTeam_dpdwn_parsed_div").removeAttr("hidden");//show the parsed version of the team dropdown
-                //$("#workDescriptionLine_entries").last().find(".workDescTeam_dpdwn_parsed_div").show();//show the parsed version of the team dropdown
-                //$("#workDescriptionLine_entries").last().find("#newWorkDescBtn_add").remove();//remove the add button, only needed for new work descriptions
-                //$("#workDescriptionLine_entries").last().find("#newWorkDescBtn_clear").remove();//remove the clear button, only needed for new work descriptions
-                //$("#workDescriptionLine_entries").last().find(".lineWorkDescBtn_edit").removeAttr("hidden");//show the edit button, only needed for work description line entries
-                //$("#workDescriptionLine_entries").last().find(".lineWorkDescBtn_delete").removeAttr("hidden");//show the delete button, only needed for work description line entries
-                //$("#workDescriptionLine_entries").last().find(".workDescTeam_narr_div").css('border-bottom-style', 'none');
-                //$("#workDescriptionLine_entries").last().find(".workDescTeam_dpdwn_parsed_div").css('border-bottom-style', 'none');
-                //$("#workDescriptionLine_entries").last().find(".workDescTeam_button_div").css('border-bottom-style', 'none');
+
 
                 $("#workDescriptionLine_" + indexWorkDescEntries + "_row").find(".workDescTeam_narr_div").attr("contenteditable", "false");//lock the narrative for edits
                 $("#workDescriptionLine_" + indexWorkDescEntries + "_row").find(".workDescTeam_dpdwn_div").hide();//hide the team dropdown
@@ -396,8 +392,23 @@
                 $("#workDescTeam_dpdwnLine_" + indexWorkDescEntries).select2();//re-initialize the last created work description entry
                 $("#workDescTeam_dpdwn").select2();
 
+                //$("#workDescTeam_dpdwnLine_" + indexWorkDescEntries).find("select2.select2-container.select2-container--default").remove();
+                //console.log($("#workDescriptionLine_" + indexWorkDescEntries + "_row").find(".workDescTeam_dpdwn_div span:nth-of-type(2)").attr("class"));
+                //console.log($("#workDescriptionLine_" + indexWorkDescEntries + "_row").find(".select2 select2-container select2-container--default").attr("data-select2-id"));//doesn't work
+                //console.log($("#workDescriptionLine_" + indexWorkDescEntries + "_row").find(".select2.select2-container.select2-container--default").attr("data-select2-id"));//doesn't work
+                
+                //$("#workDescTeam_dpdwnLine_" + indexWorkDescEntries).find("select2.select2-container.select2-container--below").prop("class", "select2.select2-container.select2-container--below.select2-container--focus");
+
                 select2_reinitialize("workDescTeam_dpdwn");
                 select2_reinitialize("workDescTeam_dpdwnLine_" + indexWorkDescEntries);
+
+                console.log($("#workDescriptionLine_" + indexWorkDescEntries + "_row").find(".workDescTeam_dpdwn_div span:eq(0)").attr("data-select2-id"));
+                //console.log($("#workDescriptionLine_" + indexWorkDescEntries + "_row").find(".workDescTeam_dpdwn_div span:eq(1)").attr("data-select2-id"));
+                console.log($("#workDescriptionLine_" + indexWorkDescEntries + "_row").find(".workDescTeam_dpdwn_div").html());
+                console.log($("#workDescriptionLine_" + indexWorkDescEntries + "_row").find(".workDescTeam_dpdwn_div span").html());
+                console.log($("#workDescriptionLine_" + indexWorkDescEntries + "_row").find(".select2.select2-container.select2-container--default").html());
+
+                //select2_reinitialize("workDescTeam_dpdwnLine_" + indexWorkDescEntries);
 
                 
             });
