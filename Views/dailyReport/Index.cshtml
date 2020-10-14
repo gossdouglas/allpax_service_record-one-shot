@@ -347,24 +347,12 @@
                 //$(currentWorkDescTeamRendered).clone(true).prop("id", "select2-workDescTeam_dpdwn_" + indexWorkDescEntries+ "-container").appendTo("#workDescriptionLine_entries");
                 
                 //give the cloned row a unique ID.  this is necessary for automatic follow-on steps to carry out properly
-                //$("#workDescriptionLine_entries").last().find(".workDescTeam_dpdwn").prop("id", "workDescTeam_dpdwnLine_" + indexWorkDescEntries);
                 $("#workDescriptionLine_" + indexWorkDescEntries + "_row").find(".workDescTeam_dpdwn").prop("id", "workDescTeam_dpdwnLine_" + indexWorkDescEntries);
 
                 var editedworkDescTeam_dpdwn_div = $("#workDescriptionLine_" + indexWorkDescEntries + "_row").find(".workDescTeam_dpdwn_div").html();
-                //console.log(editedworkDescTeam_dpdwn_div);
                 editedworkDescTeam_dpdwn_div = editedworkDescTeam_dpdwn_div.replace(/-workDescTeam_dpdwn-/gi, "-workDescTeam_dpdwnLine_" + indexWorkDescEntries + "-");
-                //console.log(editedworkDescTeam_dpdwn_div);
 
                 $("#workDescriptionLine_" + indexWorkDescEntries + "_row").find(".workDescTeam_dpdwn_div").html(editedworkDescTeam_dpdwn_div);
-
-                //set the class type to a select2 type
-                //$("#workDescriptionLine_entries").last().find(".workDescTeam_dpdwn").prop("class", "workDescTeam_dpdwnLine select2-hidden-accessible");
-                //set the id of the newly created line to null
-                //$("#workDescriptionLine_entries").last().find(".workDescTeam_dpdwn").prop("id", "");
-
-                //$('.workDescTeam_dpdwn').select2();//re-initalize after clone
-                //$('.workDescTeam_dpdwnLine').select2();//re-initalize after clone
-
 
                 $("#workDescriptionLine_" + indexWorkDescEntries + "_row").find(".workDescTeam_narr_div").attr("contenteditable", "false");//lock the narrative for edits
                 $("#workDescriptionLine_" + indexWorkDescEntries + "_row").find(".workDescTeam_dpdwn_div").hide();//hide the team dropdown
@@ -408,10 +396,6 @@
                 //console.log($("#workDescriptionLine_" + indexWorkDescEntries + "_row").find(".workDescTeam_dpdwn_div").html());
                 //console.log($("#workDescriptionLine_" + indexWorkDescEntries + "_row").find(".workDescTeam_dpdwn_div span").html());
                 //console.log($("#workDescriptionLine_" + indexWorkDescEntries + "_row").find(".select2.select2-container.select2-container--default").html());
-
-                //select2_reinitialize("workDescTeam_dpdwnLine_" + indexWorkDescEntries);
-
-                
             });
 
             //$(".workDescTeam_button_div").click(function () {
