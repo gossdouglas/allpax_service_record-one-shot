@@ -323,6 +323,7 @@
 
                 var selectedTeamListHtml = $("#workDescriptionLine_template_row").find(".select2-selection__rendered").html();
                 var selectedTeamListHtml2 = $("#workDescriptionLine_template_row").find(".select2").html();
+                console.log($("#workDescriptionLine_template_row").html());
                 
                 //console.log(selectedTeamListHtml2);
                 //var currentworkDescriptionLine_entries_row = $("#workDescriptionLine_" + indexWorkDescEntries + "_row"); 
@@ -342,7 +343,7 @@
 
                 //append a new row
                 $("#workDescriptionLine_template_row").clone(true).prop("id", "workDescriptionLine_" + indexWorkDescEntries + "_row").appendTo("#workDescriptionLine_entries");
-
+                
                 //$(currentWorkDescTeamRendered).clone(true).prop("id", "select2-workDescTeam_dpdwn_" + indexWorkDescEntries+ "-container").appendTo("#workDescriptionLine_entries");
                 
                 //give the cloned row a unique ID.  this is necessary for automatic follow-on steps to carry out properly
@@ -402,11 +403,11 @@
                 select2_reinitialize("workDescTeam_dpdwn");
                 select2_reinitialize("workDescTeam_dpdwnLine_" + indexWorkDescEntries);
 
-                console.log($("#workDescriptionLine_" + indexWorkDescEntries + "_row").find(".workDescTeam_dpdwn_div span:eq(0)").attr("data-select2-id"));
-                //console.log($("#workDescriptionLine_" + indexWorkDescEntries + "_row").find(".workDescTeam_dpdwn_div span:eq(1)").attr("data-select2-id"));
-                console.log($("#workDescriptionLine_" + indexWorkDescEntries + "_row").find(".workDescTeam_dpdwn_div").html());
-                console.log($("#workDescriptionLine_" + indexWorkDescEntries + "_row").find(".workDescTeam_dpdwn_div span").html());
-                console.log($("#workDescriptionLine_" + indexWorkDescEntries + "_row").find(".select2.select2-container.select2-container--default").html());
+                //console.log($("#workDescriptionLine_" + indexWorkDescEntries + "_row").find(".workDescTeam_dpdwn_div span:eq(0)").attr("data-select2-id"));
+                ////console.log($("#workDescriptionLine_" + indexWorkDescEntries + "_row").find(".workDescTeam_dpdwn_div span:eq(1)").attr("data-select2-id"));
+                //console.log($("#workDescriptionLine_" + indexWorkDescEntries + "_row").find(".workDescTeam_dpdwn_div").html());
+                //console.log($("#workDescriptionLine_" + indexWorkDescEntries + "_row").find(".workDescTeam_dpdwn_div span").html());
+                //console.log($("#workDescriptionLine_" + indexWorkDescEntries + "_row").find(".select2.select2-container.select2-container--default").html());
 
                 //select2_reinitialize("workDescTeam_dpdwnLine_" + indexWorkDescEntries);
 
@@ -425,12 +426,9 @@
                 $(currentRow).find(".workDescTeam_narr_div").attr("contenteditable", "true");
                 $(currentRow).find(".workDescTeam_dpdwn_parsed_div").hide();
                 $(currentRow).find(".workDescTeam_dpdwn_div").show();
-                //$(currentRow).find(".workDescTeam_dpdwn_div").removeAttr("hidden");
-                
-                //$(".workDescTeam_dpdwn_parsed_div").hide();
-                //$(".workDescTeam_dpdwn_div").show();
-                //$("#newWorkDescBtn_add").show();
-                //$(".workDescTeam_narr_div").attr("contenteditable", "true");
+
+                console.log($(currentRow).find(".workDescTeam_dpdwn_div").html());
+
             });
 
             $(".lineWorkDescBtn_save").click(function () {
