@@ -344,39 +344,41 @@
                 //append a new row
                 $("#workDescriptionLine_template_row").clone(true).prop("id", "workDescriptionLine_" + indexWorkDescEntries + "_row").appendTo("#workDescriptionLine_entries");
                 //$(currentWorkDescTeamRendered).clone(true).prop("id", "select2-workDescTeam_dpdwn_" + indexWorkDescEntries+ "-container").appendTo("#workDescriptionLine_entries");
-                //console.log($("#workDescriptionLine_template_row").find("select2").attr("class"));
                 
-
                 //give the cloned row a unique ID.  this is necessary for automatic follow-on steps to carry out properly
-                $("#workDescriptionLine_entries").last().find(".workDescTeam_dpdwn").prop("id", "workDescTeam_dpdwnLine_" + indexWorkDescEntries);
+                //$("#workDescriptionLine_entries").last().find(".workDescTeam_dpdwn").prop("id", "workDescTeam_dpdwnLine_" + indexWorkDescEntries);
+                $("#workDescriptionLine_" + indexWorkDescEntries + "_row").find(".workDescTeam_dpdwn").prop("id", "workDescTeam_dpdwnLine_" + indexWorkDescEntries);
                 //set the class type to a select2 type
                 //$("#workDescriptionLine_entries").last().find(".workDescTeam_dpdwn").prop("class", "workDescTeam_dpdwnLine select2-hidden-accessible");
                 //set the id of the newly created line to null
-                $("#workDescriptionLine_entries").last().find(".workDescTeam_dpdwn").prop("id", "");
-
-                //console.log($("#workDescriptionLine_" + indexWorkDescEntries + "_row").find(".select2-selection__rendered").html());
-                //console.log($("#workDescriptionLine_" + indexWorkDescEntries + "_row").find(".workDescTeam_dpdwn").html());
-                //console.log($("#workDescriptionLine_template_row").find(".select2-selection").html());
-                //console.log($("#workDescriptionLine_" + indexWorkDescEntries + "_row").find(".select2-selection").html());
-                //$("#workDescriptionLine_entries").last().find(".select2-selection__rendered").prop("id", "select2-workDescTeam_dpdwnLine_" + indexWorkDescEntries+ "-container");
+                //$("#workDescriptionLine_entries").last().find(".workDescTeam_dpdwn").prop("id", "");
 
                 //$('.workDescTeam_dpdwn').select2();//re-initalize after clone
                 //$('.workDescTeam_dpdwnLine').select2();//re-initalize after clone
                 
-                $("#workDescriptionLine_entries").last().find(".workDescTeam_narr_div").attr("contenteditable", "false");//lock the narrative for edits
+                //$("#workDescriptionLine_entries").last().find(".workDescTeam_narr_div").attr("contenteditable", "false");//lock the narrative for edits
+                //$("#workDescriptionLine_entries").last().find(".workDescTeam_dpdwn_div").hide();//hide the team dropdown
+                //$("#workDescriptionLine_entries").last().find(".workDescTeam_dpdwn_parsed_div").removeAttr("hidden");//show the parsed version of the team dropdown
+                //$("#workDescriptionLine_entries").last().find(".workDescTeam_dpdwn_parsed_div").show();//show the parsed version of the team dropdown
+                //$("#workDescriptionLine_entries").last().find("#newWorkDescBtn_add").remove();//remove the add button, only needed for new work descriptions
+                //$("#workDescriptionLine_entries").last().find("#newWorkDescBtn_clear").remove();//remove the clear button, only needed for new work descriptions
+                //$("#workDescriptionLine_entries").last().find(".lineWorkDescBtn_edit").removeAttr("hidden");//show the edit button, only needed for work description line entries
+                //$("#workDescriptionLine_entries").last().find(".lineWorkDescBtn_delete").removeAttr("hidden");//show the delete button, only needed for work description line entries
+                //$("#workDescriptionLine_entries").last().find(".workDescTeam_narr_div").css('border-bottom-style', 'none');
+                //$("#workDescriptionLine_entries").last().find(".workDescTeam_dpdwn_parsed_div").css('border-bottom-style', 'none');
+                //$("#workDescriptionLine_entries").last().find(".workDescTeam_button_div").css('border-bottom-style', 'none');
 
-                $("#workDescriptionLine_entries").last().find(".workDescTeam_dpdwn_div").hide();//hide the team dropdown
-                $("#workDescriptionLine_entries").last().find(".workDescTeam_dpdwn_parsed_div").removeAttr("hidden");//show the parsed version of the team dropdown
-                $("#workDescriptionLine_entries").last().find(".workDescTeam_dpdwn_parsed_div").show();//show the parsed version of the team dropdown
-
-                $("#workDescriptionLine_entries").last().find("#newWorkDescBtn_add").remove();//remove the add button, only needed for new work descriptions
-                $("#workDescriptionLine_entries").last().find("#newWorkDescBtn_clear").remove();//remove the clear button, only needed for new work descriptions
-                $("#workDescriptionLine_entries").last().find(".lineWorkDescBtn_edit").removeAttr("hidden");//show the edit button, only needed for work description line entries
-                $("#workDescriptionLine_entries").last().find(".lineWorkDescBtn_delete").removeAttr("hidden");//show the delete button, only needed for work description line entries
-
-                $("#workDescriptionLine_entries").last().find(".workDescTeam_narr_div").css('border-bottom-style', 'none');
-                $("#workDescriptionLine_entries").last().find(".workDescTeam_dpdwn_parsed_div").css('border-bottom-style', 'none');
-                $("#workDescriptionLine_entries").last().find(".workDescTeam_button_div").css('border-bottom-style', 'none');
+                $("#workDescriptionLine_" + indexWorkDescEntries + "_row").find(".workDescTeam_narr_div").attr("contenteditable", "false");//lock the narrative for edits
+                $("#workDescriptionLine_" + indexWorkDescEntries + "_row").find(".workDescTeam_dpdwn_div").hide();//hide the team dropdown
+                $("#workDescriptionLine_" + indexWorkDescEntries + "_row").find(".workDescTeam_dpdwn_parsed_div").removeAttr("hidden");//show the parsed version of the team dropdown
+                $("#workDescriptionLine_" + indexWorkDescEntries + "_row").find(".workDescTeam_dpdwn_parsed_div").show();//show the parsed version of the team dropdown
+                $("#workDescriptionLine_" + indexWorkDescEntries + "_row").find("#newWorkDescBtn_add").remove();//remove the add button, only needed for new work descriptions
+                $("#workDescriptionLine_" + indexWorkDescEntries + "_row").find("#newWorkDescBtn_clear").remove();//remove the clear button, only needed for new work descriptions
+                $("#workDescriptionLine_" + indexWorkDescEntries + "_row").find(".lineWorkDescBtn_edit").removeAttr("hidden");//show the edit button, only needed for work description line entries
+                $("#workDescriptionLine_" + indexWorkDescEntries + "_row").find(".lineWorkDescBtn_delete").removeAttr("hidden");//show the delete button, only needed for work description line entries
+                $("#workDescriptionLine_" + indexWorkDescEntries + "_row").last().find(".workDescTeam_narr_div").css('border-bottom-style', 'none');
+                $("#workDescriptionLine_" + indexWorkDescEntries + "_row").find(".workDescTeam_dpdwn_parsed_div").css('border-bottom-style', 'none');
+                $("#workDescriptionLine_" + indexWorkDescEntries + "_row").find(".workDescTeam_button_div").css('border-bottom-style', 'none');
 
                 //BEGIN RESET THE NEW WORK DESCRIPTION ENTRY ROW AFTER CLONING
                 $("#workDescriptionLine_template_row").find(".workDescTeam_narr_div").html("");//clear the new work description narrative text
@@ -394,7 +396,7 @@
                 //$(".workDescTeam_dpdwn").select2();
 
                 select2_reinitialize("workDescTeam_dpdwn");
-                select2_reinitialize("workDescTeam_dpdwnLine");
+                //select2_reinitialize("workDescTeam_dpdwnLine");
 
                 //$("#workDescriptionLine_" + indexWorkDescEntries + "_row").find(".select2-selection__rendered").html(selectedTeamListHtml); 
                 $("#workDescriptionLine_" + indexWorkDescEntries + "_row").find(".select2").html(selectedTeamListHtml2); 
