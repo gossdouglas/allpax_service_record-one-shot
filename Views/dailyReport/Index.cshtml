@@ -43,28 +43,13 @@
 
             //select2_reinitialize();
 
-            $('.workDescTeam_dpdwn').select2({
-                width: "100%",
-                placeholder: "Select Team",
-                closeOnSelect: "false"
-            });
-
-            //$('.workDescTeam_dpdwn').on('select2:opening select2:closing', function (event) {
-            //    var $searchfield = $(this).parent().find('.select2-search__field');
-            //    $searchfield.prop('disabled', true);
+            //$('.workDescTeam_dpdwn').select2({
+            //    width: "100%",
+            //    placeholder: "Select Team",
+            //    closeOnSelect: "false"
             //});
 
-            $('.workDescTeam_dpdwnLine').select2({
-                width: "100%",
-                placeholder: "Select Team",
-                closeOnSelect: "false"
-            });
-
-            //$('.workDescTeam_dpdwnLine').on('select2:opening select2:closing', function (event) {
-            //    var $searchfield = $(this).parent().find('.select2-search__field');
-            //    $searchfield.prop('disabled', true);
-            //});
-
+            fn_enableSelect2();
 
             var dailyRptTeamArr = [];
             var dailyRptTeamUserIDArr = [];
@@ -319,27 +304,25 @@
             //begin #addButton
             $(".newWorkDescBtn_add").click(function () {//when the add button is clicked...
 
+                //alert('yo')
                 indexWorkDescEntries = indexWorkDescEntries + 1;
+ 
+                //var currentWorkDescTeamShortNamesParsed = "";
+                ////select the list elements that contain the short names of the team members
+                //var currentTeamShortNameLists = $(this).parent().parent().find(".workDescTeam_dpdwn_div").find(".select2-selection__rendered li");
+                ////console.log(currentTeamShortNameLists.attr("title"))
+                ////select the div where the short names will be written
+                //var currentTeamDpdwnParsed = $(this).parent().parent().find(".workDescTeam_dpdwn_parsed_div");
 
-                //var selectedTeamListHtml = $("#workDescriptionLine_template_row").find(".select2-selection__rendered").html();
-                //var selectedTeamListHtml2 = $("#workDescriptionLine_template_row").find(".select2").html();
-                //console.log($(".workDescriptionLine_template_row").html());
-                
-                //console.log(selectedTeamListHtml2);
-                //var currentworkDescriptionLine_entries_row = $("#workDescriptionLine_" + indexWorkDescEntries + "_row"); 
+                //$(currentTeamShortNameLists).each(function (index) {
+                //    currentWorkDescTeamShortNamesParsed = currentWorkDescTeamShortNamesParsed.concat($(this).attr("title") + "|");
+                //    //console.log(currentWorkDescTeamShortNamesParsed);
+                //});
+                //currentTeamDpdwnParsed.html(currentWorkDescTeamShortNamesParsed);
 
-                var currentWorkDescTeamShortNamesParsed = "";
-                //select the list elements that contain the short names of the team members
-                var currentTeamShortNameLists = $(this).parent().parent().find(".workDescTeam_dpdwn_div").find(".select2-selection__rendered li");
-                //console.log(currentTeamShortNameLists.attr("title"))
-                //select the div where the short names will be written
-                var currentTeamDpdwnParsed = $(this).parent().parent().find(".workDescTeam_dpdwn_parsed_div");
+                fn_produceParsedShortNames($(this));
 
-                $(currentTeamShortNameLists).each(function (index) {
-                    currentWorkDescTeamShortNamesParsed = currentWorkDescTeamShortNamesParsed.concat($(this).attr("title") + "|");
-                    //console.log(currentWorkDescTeamShortNamesParsed);
-                });
-                currentTeamDpdwnParsed.html(currentWorkDescTeamShortNamesParsed);
+                fn_disableSelect2();
 
                 //$('#workDescTeam_dpdwn').select2("destroy");
 
@@ -370,16 +353,28 @@
                 $(this).parent().parent().find(".workDescTeam_button_div").css('border-bottom-style', 'none');
 
                 $(".workDescriptionLine_template_row_hidden").removeAttr("hidden");
-                //$(".workDescriptionLine_template_row_hidden").select2('destroy');
-                $(".workDescriptionLine_template_row_active").select2('destroy');
+                //$(".workDescTeam_dpdwn").select2('destroy');
+
+                //$(".workDescriptionLine_template_row_active").select2('destroy');//not using select2 apparently
                 //$(".workDescriptionLine_template_row_hidden").clone(true).prop("id", "workDescLine_" + indexWorkDescEntries).prop("class", "row workDescriptionLine_template_row_active").appendTo("#workDescriptionLine_template");
-                //$(".workDescriptionLine_template_row_hidden").clone(true).prop("class", "row workDescriptionLine_template_row_active").appendTo("#workDescriptionLine_template");
+                
                 $(this).parent().parent().prop("id", "workDescLine_" + indexWorkDescEntries).appendTo("#workDescriptionLine_template");
+                $(".workDescriptionLine_template_row_hidden").clone(true).prop("class", "row workDescriptionLine_template_row_active").appendTo("#workDescriptionLine_template");
+                //$(newActiveRowHtml).appendTo("#workDescriptionLine_template");
+
+                //$('.workDescTeam_dpdwn').select2({
+                //    width: "100%",
+                //    placeholder: "Select Team",
+                //    closeOnSelect: "false"
+                //});
+
+                //$(".workDescTeam_dpdwn").select2();
 
                 //select2_reinitialize("workDescLine_" + indexWorkDescEntries);
                 //$("#workDescLine_" + indexWorkDescEntries).select2('destroy');
                 //$("#workDescLine_" + indexWorkDescEntries).select2();
-                $("#workDescriptionLine_template_row_hidden").attr("hidden", "true");//
+                $(".workDescriptionLine_template_row_hidden").attr("hidden", "true");//
+                fn_enableSelect2();
 
                 //BEGIN RESET THE NEW WORK DESCRIPTION ENTRY ROW AFTER CLONING
                 //$("#workDescriptionLine_template_row").find(".workDescTeam_narr_div").html("");//clear the new work description narrative text
@@ -395,22 +390,12 @@
                 //$(".workDescTeam_dpdwnLine").select2();
                 //$("#workDescTeam_dpdwnLine_" + indexWorkDescEntries).select2();//re-initialize the last created work description entry
                 //$("#workDescTeam_dpdwn").select2();
-
-                //$("#workDescTeam_dpdwnLine_" + indexWorkDescEntries).find("select2.select2-container.select2-container--default").remove();
-                //console.log($("#workDescriptionLine_" + indexWorkDescEntries + "_row").find(".workDescTeam_dpdwn_div span:nth-of-type(2)").attr("class"));
-                //console.log($("#workDescriptionLine_" + indexWorkDescEntries + "_row").find(".select2 select2-container select2-container--default").attr("data-select2-id"));//doesn't work
-                //console.log($("#workDescriptionLine_" + indexWorkDescEntries + "_row").find(".select2.select2-container.select2-container--default").attr("data-select2-id"));//doesn't work
                 
                 //$("#workDescTeam_dpdwnLine_" + indexWorkDescEntries).find("select2.select2-container.select2-container--below").prop("class", "select2.select2-container.select2-container--below.select2-container--focus");
 
                 //select2_reinitialize("workDescTeam_dpdwn");
                 //select2_reinitialize("workDescTeam_dpdwnLine_" + indexWorkDescEntries);
 
-                //console.log($("#workDescriptionLine_" + indexWorkDescEntries + "_row").find(".workDescTeam_dpdwn_div span:eq(0)").attr("data-select2-id"));
-                ////console.log($("#workDescriptionLine_" + indexWorkDescEntries + "_row").find(".workDescTeam_dpdwn_div span:eq(1)").attr("data-select2-id"));
-                //console.log($("#workDescriptionLine_" + indexWorkDescEntries + "_row").find(".workDescTeam_dpdwn_div").html());
-                //console.log($("#workDescriptionLine_" + indexWorkDescEntries + "_row").find(".workDescTeam_dpdwn_div span").html());
-                //console.log($("#workDescriptionLine_" + indexWorkDescEntries + "_row").find(".select2.select2-container.select2-container--default").html());
             });
 
             //$(".workDescTeam_button_div").click(function () {
@@ -426,7 +411,7 @@
                 $(currentRow).find(".workDescTeam_dpdwn_parsed_div").hide();
                 $(currentRow).find(".workDescTeam_dpdwn_div").show();
 
-                console.log($(currentRow).find(".workDescTeam_dpdwn_div").html());
+                //console.log($(currentRow).find(".workDescTeam_dpdwn_div").html());
 
             });
 
@@ -440,6 +425,7 @@
                 $(currentRow).find(".workDescTeam_narr_div").attr("contenteditable", "false");
                 $(currentRow).find(".workDescTeam_dpdwn_parsed_div").show();
                 $(currentRow).find(".workDescTeam_dpdwn_div").hide();
+                fn_produceParsedShortNames($(this));
                 //$(currentRow).find(".workDescTeam_dpdwn_div").removeAttr("hidden");
 
                 //$(".workDescTeam_dpdwn_parsed_div").hide();
@@ -560,6 +546,43 @@
                     placeholder: "Select Team",
                     closeOnSelect: "false"
                 });
+            }
+
+            $("#test_enableSelect2").click(function () {
+                fn_enableSelect2()
+            });
+
+            $("#test_disableSelect2").click(function () {
+                fn_disableSelect2()
+            });
+
+            function fn_enableSelect2() {
+                $('.workDescTeam_dpdwn').select2({
+                    width: "100%",
+                    placeholder: "Select Team",
+                    closeOnSelect: "false"
+                })
+            }
+
+            function fn_disableSelect2() {
+                $('.workDescTeam_dpdwn').select2('destroy')
+            }
+
+            function fn_produceParsedShortNames(button) {
+                var currentWorkDescTeamShortNamesParsed = "";
+                //select the list elements that contain the short names of the team members
+                //var currentTeamShortNameLists = $(this).parent().parent().find(".workDescTeam_dpdwn_div").find(".select2-selection__rendered li");
+                var currentTeamShortNameLists = $(button).parent().parent().find(".workDescTeam_dpdwn_div").find(".select2-selection__rendered li");                
+                //console.log(currentTeamShortNameLists.attr("title"))
+                //select the div where the short names will be written
+                //var currentTeamDpdwnParsed = $(this).parent().parent().find(".workDescTeam_dpdwn_parsed_div");
+                var currentTeamDpdwnParsed = $(button).parent().parent().find(".workDescTeam_dpdwn_parsed_div");
+
+                $(currentTeamShortNameLists).each(function (index) {
+                    currentWorkDescTeamShortNamesParsed = currentWorkDescTeamShortNamesParsed.concat($(this).attr("title") + "|");
+                    //console.log(currentWorkDescTeamShortNamesParsed);
+                });
+                currentTeamDpdwnParsed.html(currentWorkDescTeamShortNamesParsed);
             }
 
         });//end document read jquery statements
@@ -745,7 +768,7 @@
         </div>
     </div>
 
-    <div class="row workDescriptionLine_template_row_hidden" id="workDescriptionLine_template_row_hidden" style="border:1px solid black;" hidden>
+    <div class="row workDescriptionLine_template_row_hidden" id="" style="border:1px solid black;" hidden>
         <div class="col-6 workDescTeam_narr_div" id="" contenteditable="true" style="padding:5px; border:1px solid black;">
 
         </div>
@@ -765,6 +788,10 @@
             <button class='btn btn-light btn-sm lineWorkDescBtn_delete' hidden><i class='far fa-minus-square fa-2x' style='color: black;'></i></button>
         </div>
     </div>
+</div>
+<div class="col-12" id="">
+    <button id="test_enableSelect2" class="btn btn-light btn-sm ">enable select2</button>
+    <button id="test_disableSelect2" class="btn btn-light btn-sm ">disable select2</button>
 </div>
 
     @*END NEW WORK DESCRIPTION TEMPLATE*@
