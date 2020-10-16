@@ -389,14 +389,6 @@
                 return filled;
             }
 
-            $("#test_enableSelect2").click(function () {
-                fn_enableSelect2()
-            });
-
-            $("#test_disableSelect2").click(function () {
-                fn_disableSelect2()
-            });
-
             function fn_enableSelect2() {
                 $('.workDescTeam_dpdwn').select2({
                     width: "100%",
@@ -418,7 +410,6 @@
 
                 $(currentTeamShortNameLists).each(function (index) {
                     currentWorkDescTeamShortNamesParsed = currentWorkDescTeamShortNamesParsed.concat($(this).attr("title") + "|");
-                    //console.log(currentWorkDescTeamShortNamesParsed);
                 });
                 currentTeamDpdwnParsed.html(currentWorkDescTeamShortNamesParsed);
             }
