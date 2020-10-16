@@ -373,11 +373,12 @@
                 //$(".workDescriptionLine_template_row_hidden").select2('destroy');
                 $(".workDescriptionLine_template_row_active").select2('destroy');
                 //$(".workDescriptionLine_template_row_hidden").clone(true).prop("id", "workDescLine_" + indexWorkDescEntries).prop("class", "row workDescriptionLine_template_row_active").appendTo("#workDescriptionLine_template");
-                $(".workDescriptionLine_template_row_hidden").clone(true).prop("class", "row workDescriptionLine_template_row_active").appendTo("#workDescriptionLine_template");
+                //$(".workDescriptionLine_template_row_hidden").clone(true).prop("class", "row workDescriptionLine_template_row_active").appendTo("#workDescriptionLine_template");
+                $(this).parent().parent().prop("id", "workDescLine_" + indexWorkDescEntries).appendTo("#workDescriptionLine_template");
 
                 //select2_reinitialize("workDescLine_" + indexWorkDescEntries);
                 //$("#workDescLine_" + indexWorkDescEntries).select2('destroy');
-                $("#workDescLine_" + indexWorkDescEntries).select2();
+                //$("#workDescLine_" + indexWorkDescEntries).select2();
                 $("#workDescriptionLine_template_row_hidden").attr("hidden", "true");//
 
                 //BEGIN RESET THE NEW WORK DESCRIPTION ENTRY ROW AFTER CLONING
